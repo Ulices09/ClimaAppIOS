@@ -28,8 +28,9 @@ class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        //locationManager.requestWhenInUseAuthorization() //La app pide autorización para usar tu gps
+        locationManager.requestWhenInUseAuthorization()
         locationManager.startMonitoringSignificantLocationChanges()
         
         tableView.delegate = self
@@ -54,13 +55,12 @@ class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDat
             currentWeather.downloadWeatherDetails {
                 self.downloadForecastData {
                     self.updateMainUI()
-                    self.tableView.reloadData()
                 }
             }
             
         } else {
             locationManager.requestWhenInUseAuthorization()
-            //locationAuthStatus()
+            locationAuthStatus()
         }
     }
     
@@ -77,6 +77,7 @@ class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         let forecast = Forecast(weatherDict: obj)
                         self.forecasts.append(forecast)                        
                     }
+                    self.tableView.reloadData()
                 }
             }
             completed()
