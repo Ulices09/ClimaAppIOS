@@ -11,10 +11,10 @@ import Alamofire
 
 class CurrentWeather {
     
-    var _city: String!
-    var _date: String!
-    var _weatherType: String!
-    var _currentTemp: Double!
+    private var _city: String!
+    private var _date: String!
+    private var _weatherType: String!
+    private var _currentTemp: Double!
     
     var city: String {
         if _city == nil{
@@ -81,6 +81,5 @@ class CurrentWeather {
             }
             completed()
         }
-        
     }
 }

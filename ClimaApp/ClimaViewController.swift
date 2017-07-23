@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Alamofire
+import CoreLocation
 
-class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var currentTempLabel: UILabel!
@@ -17,20 +19,68 @@ class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var currentWeatherTypeLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    let locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
+    
     var currentWeather: CurrentWeather!
+    var forecasts = [Forecast]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        //locationManager.requestWhenInUseAuthorization() //La app pide autorización para usar tu gps
+        locationManager.startMonitoringSignificantLocationChanges()
         
         tableView.delegate = self
         tableView.dataSource = self
 
         currentWeather = CurrentWeather()
         
-        currentWeather.downloadWeatherDetails {
-            self.updateMainUI()
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        locationAuthStatus()
         
+    }
+    
+    func locationAuthStatus() {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+            currentLocation = locationManager.location
+            Location.sharedInstance.latitude = currentLocation.coordinate.latitude
+            Location.sharedInstance.longitude = currentLocation.coordinate.longitude
+            
+            currentWeather.downloadWeatherDetails {
+                self.downloadForecastData {
+                    self.updateMainUI()
+                    self.tableView.reloadData()
+                }
+            }
+            
+        } else {
+            locationManager.requestWhenInUseAuthorization()
+            //locationAuthStatus()
+        }
+    }
+    
+    func downloadForecastData(completed: @escaping DownloadComplete) {
+        
+        let forecastURL = URL(string: FORECAST_URL)!
+        Alamofire.request(forecastURL).responseJSON {
+            response in
+            let result = response.result
+            
+            if let dict = result.value as? Dictionary<String, Any> {
+                if let list = dict["list"] as? [Dictionary<String, Any>] {
+                    for obj in list {
+                        let forecast = Forecast(weatherDict: obj)
+                        self.forecasts.append(forecast)                        
+                    }
+                }
+            }
+            completed()
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -38,12 +88,18 @@ class ClimaViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return forecasts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "climaCell", for: indexPath)
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "climaCell", for: indexPath) as? ClimaCell {
+            let forecast = forecasts[indexPath.row]
+            cell.configureCell(forecast: forecast)
+            return cell
+        }
+        else{
+            return ClimaCell()
+        }
     }
     
     func updateMainUI() {

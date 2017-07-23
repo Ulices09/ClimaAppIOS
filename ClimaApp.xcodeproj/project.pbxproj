@@ -12,6 +12,9 @@
 		5FBF04E01F20471500CE420B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBF04DE1F20471500CE420B /* Main.storyboard */; };
 		5FBF04E21F20471500CE420B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBF04E11F20471500CE420B /* Assets.xcassets */; };
 		5FBF04E51F20471500CE420B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBF04E31F20471500CE420B /* LaunchScreen.storyboard */; };
+		5FFAA3971F244F0600305935 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFAA3961F244F0600305935 /* Forecast.swift */; };
+		5FFAA3991F245E7E00305935 /* ClimaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFAA3981F245E7E00305935 /* ClimaCell.swift */; };
+		5FFAA39B1F24680D00305935 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFAA39A1F24680D00305935 /* Location.swift */; };
 		5FFAC34A1F24106300794EE8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFAC3491F24106300794EE8 /* Constants.swift */; };
 		5FFAC34C1F2413A000794EE8 /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFAC34B1F2413A000794EE8 /* CurrentWeather.swift */; };
 		77B27977056B8C684EDFC353 /* Pods_ClimaApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389F8667C39E766AF784B7F0 /* Pods_ClimaApp.framework */; };
@@ -27,6 +30,9 @@
 		5FBF04E11F20471500CE420B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBF04E41F20471500CE420B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBF04E61F20471500CE420B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FFAA3961F244F0600305935 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
+		5FFAA3981F245E7E00305935 /* ClimaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClimaCell.swift; sourceTree = "<group>"; };
+		5FFAA39A1F24680D00305935 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		5FFAC3491F24106300794EE8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5FFAC34B1F2413A000794EE8 /* CurrentWeather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		B3EF1C96741BA4542A50D0C0 /* Pods-ClimaApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClimaApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ClimaApp/Pods-ClimaApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +73,9 @@
 			children = (
 				5FFAC3491F24106300794EE8 /* Constants.swift */,
 				5FFAC34B1F2413A000794EE8 /* CurrentWeather.swift */,
+				5FFAA3961F244F0600305935 /* Forecast.swift */,
+				5FFAA39A1F24680D00305935 /* Location.swift */,
+				5FFAA3981F245E7E00305935 /* ClimaCell.swift */,
 				5FBF04DC1F20471500CE420B /* ClimaViewController.swift */,
 				5FBF04DA1F20471500CE420B /* AppDelegate.swift */,
 				5FBF04DE1F20471500CE420B /* Main.storyboard */,
@@ -217,10 +226,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FFAA3991F245E7E00305935 /* ClimaCell.swift in Sources */,
 				5FFAC34C1F2413A000794EE8 /* CurrentWeather.swift in Sources */,
 				5FBF04DD1F20471500CE420B /* ClimaViewController.swift in Sources */,
 				5FBF04DB1F20471500CE420B /* AppDelegate.swift in Sources */,
 				5FFAC34A1F24106300794EE8 /* Constants.swift in Sources */,
+				5FFAA3971F244F0600305935 /* Forecast.swift in Sources */,
+				5FFAA39B1F24680D00305935 /* Location.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
